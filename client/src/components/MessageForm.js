@@ -16,8 +16,17 @@ class MessageForm extends React.Component{
         }
     }
 
+    scrollToBottom = () => {
+        this.messageRef.current.scrollIntoView()
+    }
+
     componentDidMount(){
         this.messageRef.current.focus()
+        this.scrollToBottom()
+    }
+
+    componentDidUpdate(){
+        this.scrollToBottom()
     }
 
     handleInputChange = e => {
@@ -50,6 +59,7 @@ class MessageForm extends React.Component{
                     <input 
                         type='text'
                         name='message'
+                        placeholder='Enter new message'
                         spellCheck='false'
                         value={message}
                         ref={this.messageRef}
