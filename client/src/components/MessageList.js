@@ -1,3 +1,5 @@
+import './MessageList.scss'
+
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -8,7 +10,7 @@ const MessageList = ({ messages }) => {
     const list = messages.map(message => <Message key={message.id} message={message} />)
 
     return (
-        <div>
+        <div className='MessageList'>
             {list}
         </div>
     )

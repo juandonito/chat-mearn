@@ -8,7 +8,8 @@ export const doNewMessage = (author, message) => {
         payload : {
             id: uuid(),
             author,
-            message
+            message,
+            date: new Date()
         }
     }
 }

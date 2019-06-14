@@ -1,0 +1,39 @@
+.Message{
+    width: 100%;
+    justify-content: flex-end;
+
+    .msg{
+
+        max-width: 90%;
+        margin: 0.25rem 0.5rem;
+
+        .author{
+            font-size: 0.75rem;
+        }
+
+        .content{
+            overflow-wrap: break-word;
+            padding: 0.5rem;    
+            border-radius: 4px;
+        }
+
+        &.own{
+            float: right;
+
+            .content{
+                background: #FF5964;
+                color: white;
+            }
+        }
+
+        &.other{
+            float: left;
+
+            .content{
+                background: #353535;
+                color: white;
+            }
+        }        
+    }
+
+}
