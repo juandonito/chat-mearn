@@ -1,0 +1,27 @@
+.MessageForm{
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+
+    form{
+        display: grid;
+        grid-template-columns: 1fr 50px;
+        height: 1.75rem;
+
+        input{
+            border: none;
+            padding: 0.5rem;
+        }
+
+        button{
+            border: none;
+            background: #FF5964;
+            color: white;
+        }
+    }
+}

@@ -31,8 +31,12 @@ class Authentication extends React.Component{
         const { handleUsernameSubmit } = this.props
 
         e.preventDefault()
-        handleUsernameSubmit(username)
-        this.setState({ username: ''})
+
+        if(username){
+            handleUsernameSubmit(username)
+            this.setState({ username: ''})
+        }
+        
     }
 
     render() {
@@ -52,6 +56,7 @@ class Authentication extends React.Component{
                         onChange={this.handleInputChange}
                         ref={this.usernameRef}
                         id='username'
+                        spellCheck='false'
                     />
                 </form>
             </div>
