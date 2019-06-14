@@ -1,8 +1,12 @@
 import React from 'react'
 
+import Authentication from './components/Authentication'
+
 const App = () => {
     return (
-        <div>This is my chat app</div>
+        <div className='App'>
+            <Authentication />
+        </div>
     )
 }
 
