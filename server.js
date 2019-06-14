@@ -1,17 +1,26 @@
+const path = require('path')
 const express = require('express')
-const path = require("path")
-require("dotenv").config()
+require('dotenv').config()
 
 const PORT = process.env.PORT || 8000
 
-const app = express()
+const app = express();
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
 
 app.use(express.static(path.join(__dirname, "client", "build")))
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('diconnect', () => {
+        console.log('user disconnected')
+    })
+})
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
-app.listen(PORT, () => {
+http.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
 })
