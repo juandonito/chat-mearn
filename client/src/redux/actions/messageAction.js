@@ -3,7 +3,11 @@ import uuid from 'uuid/v4'
 import { 
     MESSAGE_ADD,
     SOCKET_MESSAGE_SEND
-} from '../constants'
+} from '../constants/actionTypes'
+
+import {
+    TEXT
+} from '../constants/messageTypes'
 
 export const doSendMessage = (author, message) => {
     return {
@@ -12,7 +16,8 @@ export const doSendMessage = (author, message) => {
             id: uuid(),
             author,
             message,
-            date: new Date()
+            date: new Date(),
+            type: TEXT
         }
     }
 }

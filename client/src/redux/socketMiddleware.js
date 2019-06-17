@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 
-import { SOCKET_MESSAGE_SEND } from './constants'
+import { SOCKET_MESSAGE_SEND } from './constants/actionTypes'
 
 import { doAddMessage } from './actions/messageAction'
 

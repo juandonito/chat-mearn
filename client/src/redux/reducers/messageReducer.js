@@ -1,4 +1,4 @@
-import { MESSAGE_ADD } from '../constants'
+import { MESSAGE_ADD } from '../constants/actionTypes'
 
 const MESSAGE_STATE = {
     messages: []

@@ -1,4 +1,4 @@
-import { USERNAME_SAVE } from '../constants'
+import { USERNAME_SAVE } from '../constants/actionTypes'
 
 export const doSaveUsername = (username) => {
     return {
