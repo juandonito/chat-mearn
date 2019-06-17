@@ -3,8 +3,6 @@ import './Authentication.scss'
 import React from 'react'
 import { connect } from 'react-redux'
 
-import io from 'socket.io-client'
-
 import { doSaveUsername } from '../redux/actions/userActions'
 
 class Authentication extends React.Component{
@@ -33,8 +31,6 @@ class Authentication extends React.Component{
         const { handleUsernameSubmit } = this.props
 
         e.preventDefault()
-
-        const socket = io('/')
 
         if(username){
             handleUsernameSubmit(username)
