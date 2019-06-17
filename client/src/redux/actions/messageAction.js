@@ -1,15 +1,25 @@
 import uuid from 'uuid/v4'
 
-import { MESSAGE_NEW } from '../constants'
+import { 
+    MESSAGE_ADD,
+    SOCKET_MESSAGE_SEND
+} from '../constants'
 
-export const doNewMessage = (author, message) => {
+export const doSendMessage = (author, message) => {
     return {
-        type: MESSAGE_NEW,
-        payload : {
+        type: SOCKET_MESSAGE_SEND,
+        payload: {
             id: uuid(),
             author,
             message,
             date: new Date()
         }
+    }
+}
+
+export const doAddMessage = (payload) => {
+    return {
+        type: MESSAGE_ADD,
+        payload
     }
 }

@@ -57,6 +57,7 @@ class Authentication extends React.Component{
                         ref={this.usernameRef}
                         id='username'
                         spellCheck='false'
+                        autoComplete='off'
                     />
                 </form>
             </div>

@@ -1,4 +1,4 @@
-import { MESSAGE_NEW } from '../constants'
+import { MESSAGE_ADD } from '../constants'
 
 const MESSAGE_STATE = {
     messages: []
@@ -6,14 +6,14 @@ const MESSAGE_STATE = {
 
 const messageReducer = (state = MESSAGE_STATE, action) => {
     switch(action.type){
-        case MESSAGE_NEW: {
-            return applyNewMessage(state, action)
+        case MESSAGE_ADD: {
+            return applyAddMessage(state, action)
         }
         default: return state
     }
 }
 
-const applyNewMessage = (state, action) => {
+const applyAddMessage = (state, action) => {
     return {
         messages: [...state.messages, action.payload]
     }

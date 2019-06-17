@@ -6,7 +6,7 @@ import socketMiddleware  from './socketMiddleware'
 const store = createStore(
     rootReducer, 
     undefined,
-    applyMiddleware(thunk, socketMiddleware)
+    applyMiddleware(socketMiddleware,thunk)
 )
 
 export default store

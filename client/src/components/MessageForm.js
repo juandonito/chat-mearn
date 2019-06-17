@@ -3,7 +3,7 @@ import './MessageForm.scss'
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { doNewMessage } from '../redux/actions/messageAction'
+import { doSendMessage } from '../redux/actions/messageAction'
 
 class MessageForm extends React.Component{
 
@@ -61,6 +61,7 @@ class MessageForm extends React.Component{
                         name='message'
                         placeholder='Enter new message'
                         spellCheck='false'
+                        autoComplete='off'
                         value={message}
                         ref={this.messageRef}
                         onChange={this.handleInputChange}
@@ -82,7 +83,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        sendMessage: (author, message) => dispatch(doNewMessage(author, message))
+        sendMessage: (author, message) => dispatch(doSendMessage(author, message))
     }
 }
 

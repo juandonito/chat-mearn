@@ -1,3 +1,5 @@
 export const USERNAME_SAVE = 'USERNAME_SAVE'
 
-export const MESSAGE_NEW = 'MESSAGE_NEW'
+export const MESSAGE_ADD = 'MESSAGE_ADD'
+
+export const SOCKET_MESSAGE_SEND = 'SOCKET_MESSAGE_SEND'
