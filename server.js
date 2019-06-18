@@ -15,11 +15,15 @@ app.get("*", (req, res) => {
 })
 
 io.on('connection', (socket) => {
-    
-    console.log(socket.handshake.query.username);
+
+    const user = socket.handshake.query.username;
+       
+    console.log(`${user} has connected`);
+    socket.broadcast.emit('information message', `${user} has connected`)
     
     socket.on('disconnect', () => {
-        console.log('user disconnected')
+        console.log(`${user} has disconnected`)
+        socket.broadcast.emit('information message', `${user} has disconnected`)
     });
     socket.on('chat message', msg => {
         console.log(msg)

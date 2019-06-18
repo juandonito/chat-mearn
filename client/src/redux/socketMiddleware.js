@@ -2,7 +2,7 @@ import io from 'socket.io-client'
 
 import { SOCKET_MESSAGE_SEND, SOCKET_LOGIN } from './constants/actionTypes'
 
-import { doAddMessage } from './actions/messageAction'
+import { doAddMessage, doInformMessage } from './actions/messageAction'
 
 const createSocketMiddleware = url => store => {
 
@@ -15,6 +15,9 @@ const createSocketMiddleware = url => store => {
                 socket = io(url, {query: `username=${action.payload.username}`})
                 addChatMessageListener(socket, msg => {
                     store.dispatch(doAddMessage(msg))
+                })
+                addInformationListener(socket, msg => {
+                    store.dispatch(doInformMessage(msg))
                 })
                 break
             }
@@ -31,6 +34,10 @@ const createSocketMiddleware = url => store => {
 
 const addChatMessageListener = (socket, cb) => {
     socket.on('chat message', cb)
+}
+
+const addInformationListener = (socket, cb) => {
+    socket.on('information message', cb)
 }
 
 const socketMiddleware = createSocketMiddleware('/');

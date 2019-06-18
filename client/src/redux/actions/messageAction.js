@@ -6,7 +6,8 @@ import {
 } from '../constants/actionTypes'
 
 import {
-    TEXT
+    TEXT,
+    INFO
 } from '../constants/messageTypes'
 
 export const doSendMessage = (author, message) => {
@@ -18,6 +19,18 @@ export const doSendMessage = (author, message) => {
             message,
             date: new Date(),
             type: TEXT
+        }
+    }
+}
+
+export const doInformMessage = message => {
+    return {
+        type: MESSAGE_ADD,
+        payload: {
+            id: uuid(),
+            message,
+            date: new Date(),
+            type: INFO
         }
     }
 }
