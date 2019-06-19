@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 
-import { SOCKET_MESSAGE_SEND, SOCKET_LOGIN } from '../constants/actionTypes'
+import { SOCKET_MESSAGE_SEND, SOCKET_CONNECT } from '../constants/actionTypes'
 
 import { doAddMessage, doInformMessage } from '../actions/messageAction'
 
@@ -11,7 +11,7 @@ const createSocketMiddleware = url => store => {
     return next => action => {
 
         switch(action.type) {
-            case SOCKET_LOGIN: {
+            case SOCKET_CONNECT: {
                 socket = io(url, {query: `username=${action.payload.username}`})
                 addChatMessageListener(socket, msg => {
                     store.dispatch(doAddMessage(msg))

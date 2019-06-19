@@ -3,7 +3,7 @@ import './Authentication.scss'
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { doSaveUsername, doLoginSocket } from '../redux/actions/userActions'
+import { doLogin } from '../redux/actions/userActions'
 
 class Authentication extends React.Component{
 
@@ -28,13 +28,12 @@ class Authentication extends React.Component{
     handleSubmit = (e) => {
 
         const { username } = this.state
-        const { handleUsernameSubmit, socketConnect } = this.props
+        const { socketConnect } = this.props
 
         e.preventDefault()
 
         if(username){
             socketConnect(username)
-            handleUsernameSubmit(username)
             this.setState({ username: ''})
         }
         
@@ -69,8 +68,7 @@ class Authentication extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleUsernameSubmit: (username) => dispatch(doSaveUsername(username)),
-        socketConnect: username => dispatch(doLoginSocket(username))
+        socketConnect: username => dispatch(doLogin(username))
     }
 }
 
