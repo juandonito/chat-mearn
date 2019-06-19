@@ -1,14 +1,14 @@
-import './Message.scss'
+import './TextMessage.scss'
 
 import React from 'react'
 import { connect } from 'react-redux'
 
-const Message = ({ message, username }) => {
+const TextMessage = ({ message, username }) => {
 
     const align = message.author === username ? 'own' : 'other';
 
     return (
-        <div className='Message'>
+        <div className='text-msg'>
             <div className={`msg ${align}`}>
                 <div className='author'>
                     {message.author}
@@ -27,4 +27,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Message)
+export default connect(mapStateToProps)(TextMessage)

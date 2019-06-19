@@ -3,16 +3,18 @@ import './MessageList.scss'
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Message from './Message'
-import MessageInformation from './MessageInformation'
+import {
+    TextMessage,
+    InformationMessage 
+} from './Messages' 
 
-import { TEXT, INFO } from '../redux/constants/messageTypes'
+import { TEXT, INFO } from '../constants/messageTypes'
 
 const MessageList = ({ messages }) => {
 
     const messageType = {
-        TEXT: Message,
-        INFO: MessageInformation
+        TEXT: TextMessage,
+        INFO: InformationMessage
     }
 
     const list = messages.map(message => {

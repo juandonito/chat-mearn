@@ -8,7 +8,7 @@ import {
 import {
     TEXT,
     INFO
-} from '../constants/messageTypes'
+} from '../../constants/messageTypes'
 
 export const doSendMessage = (author, message) => {
     return {

@@ -1,8 +1,8 @@
 import io from 'socket.io-client'
 
-import { SOCKET_MESSAGE_SEND, SOCKET_LOGIN } from './constants/actionTypes'
+import { SOCKET_MESSAGE_SEND, SOCKET_LOGIN } from '../constants/actionTypes'
 
-import { doAddMessage, doInformMessage } from './actions/messageAction'
+import { doAddMessage, doInformMessage } from '../actions/messageAction'
 
 const createSocketMiddleware = url => store => {
 
