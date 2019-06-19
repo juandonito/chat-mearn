@@ -24,7 +24,7 @@ const MessageList = ({ messages }) => {
     })
 
     return (
-        <div className='MessageList'>
+        <div className='msg-list'>
             {list}
         </div>
     )

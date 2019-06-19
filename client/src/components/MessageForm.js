@@ -4,6 +4,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { doSendMessage } from '../redux/actions/messageAction'
+import { doUserSelfTyping, doUserSelfNotTyping } from '../redux/actions/userActions';
 
 class MessageForm extends React.Component{
 
@@ -25,8 +26,17 @@ class MessageForm extends React.Component{
         this.scrollToBottom()
     }
 
-    componentDidUpdate(){
+    componentDidUpdate(prevProps, prevState){
         this.scrollToBottom()
+
+        if(prevState.message === '' && this.state.message !== ''){
+            this.props.selfStartedTyping()
+        }
+
+        if(prevState.message !== '' && this.state.message === ''){
+            this.props.selfStopedTyping()
+        }
+
     }
 
     handleInputChange = e => {
@@ -52,38 +62,47 @@ class MessageForm extends React.Component{
     render() {
 
         const { message } = this.state
+        const { usersTyping } = this.props
 
         return (
-            <div className='MessageForm'>
-                <form onSubmit={this.handleSubmit}>
-                    <input 
-                        type='text'
-                        name='message'
-                        placeholder='Enter new message'
-                        spellCheck='false'
-                        autoComplete='off'
-                        value={message}
-                        ref={this.messageRef}
-                        onChange={this.handleInputChange}
-                    />
-                    <button type='submit'>
-                        send
-                    </button>
-                </form>
-            </div>
+            <React.Fragment>
+                <div className='info'>
+                    { usersTyping.length !== 0 ? `${usersTyping.join(' ')} typing` : null}
+                </div>
+                <div className='msg-form'>
+                    <form onSubmit={this.handleSubmit}>
+                        <input 
+                            type='text'
+                            name='message'
+                            placeholder='Enter new message'
+                            spellCheck='false'
+                            autoComplete='off'
+                            value={message}
+                            ref={this.messageRef}
+                            onChange={this.handleInputChange}
+                        />
+                        <button type='submit'>
+                            send
+                        </button>
+                    </form>
+                </div>
+            </React.Fragment>
         )
     }
 }
 
 const mapStateToProps = state => {
     return {
-        username: state.userState.username
+        username: state.userState.username,
+        usersTyping: state.userState.usersTyping
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        sendMessage: (author, message) => dispatch(doSendMessage(author, message))
+        sendMessage: (author, message) => dispatch(doSendMessage(author, message)),
+        selfStartedTyping: () => dispatch(doUserSelfTyping()),
+        selfStopedTyping: () => dispatch(doUserSelfNotTyping())
     }
 }
 

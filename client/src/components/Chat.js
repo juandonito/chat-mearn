@@ -7,7 +7,7 @@ import MessageForm from './MessageForm'
 
 const Chat = () => {
     return (
-        <div className='Chat'>
+        <div className='chat'>
             <MessageList />
             <MessageForm />
         </div>

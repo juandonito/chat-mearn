@@ -30,6 +30,16 @@ io.on('connection', (socket) => {
         console.log(msg)
         socket.broadcast.emit('chat message', msg)
     })
+
+    socket.on('user typing', () => {
+        console.log(`${user} is typing`)
+        socket.broadcast.emit('user typing', user)
+    })
+
+    socket.on('user not typing', () => {
+        console.log(`${user} is not typing anymore`)
+        socket.broadcast.emit('user not typing', user)
+    })
 })
 
 http.listen(PORT, () => {
