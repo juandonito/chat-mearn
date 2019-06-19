@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 import { SOCKET_MESSAGE_SEND, SOCKET_CONNECT, USER_SELF_TYPING, USER_SELF_NOT_TYPING } from '../constants/actionTypes'
 
 import { doAddMessage, doInformMessage } from '../actions/messageAction'
-import { doUserOtherTyping, doUserOtherNotTyping, doInitSocket } from '../actions/userActions';
+import { doUserOtherTyping, doUserOtherNotTyping, doInitSocket, doConnectUser, doDisconnectUser } from '../actions/userActions';
 
 const createSocketMiddleware = url => store => {
 
@@ -17,6 +17,12 @@ const createSocketMiddleware = url => store => {
                 addUserInitialisation(socket, res => {
                     store.dispatch(doInitSocket(res))
                 })
+                addUserConnectListener(socket, user => {
+                    store.dispatch(doConnectUser(user))
+                })
+                addUserDisconnectListener(socket, user => {
+                    store.dispatch(doDisconnectUser(user))
+                }) 
                 addChatMessageListener(socket, msg => {
                     store.dispatch(doAddMessage(msg))
                 })
@@ -53,6 +59,14 @@ const createSocketMiddleware = url => store => {
 
 const addUserInitialisation = (socket, cb) => {
     socket.on('init', cb)
+}
+
+const addUserConnectListener = (socket, cb) => {
+    socket.on('user connect', cb)
+}
+
+const addUserDisconnectListener = (socket, cb) => {
+    socket.on('user disconnect', cb)
 }
 
 const addChatMessageListener = (socket, cb) => {

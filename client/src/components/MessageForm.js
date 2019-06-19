@@ -62,7 +62,9 @@ class MessageForm extends React.Component{
     render() {
 
         const { message } = this.state
-        const { usersTyping } = this.props
+        const { usersTyping, usersConnected } = this.props
+
+        console.log(usersConnected)
 
         return (
             <React.Fragment>
@@ -94,7 +96,8 @@ class MessageForm extends React.Component{
 const mapStateToProps = state => {
     return {
         username: state.userState.username,
-        usersTyping: state.userState.usersTyping
+        usersTyping: state.userState.usersTyping,
+        usersConnected: state.userState.usersConnected
     }
 }
 

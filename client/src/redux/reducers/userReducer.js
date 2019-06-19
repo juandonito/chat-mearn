@@ -2,12 +2,15 @@ import {
     USERNAME_SAVE, 
     USER_OTHER_TYPING, 
     USER_OTHER_NOT_TYPING, 
-    SOCKET_INIT
+    SOCKET_INIT,
+    USER_CONNECT,
+    USER_DISCONNECT
 } from '../constants/actionTypes'
 
 const USER_STATE = {
     username: '',
-    usersTyping: []
+    usersTyping: [],
+    usersConnected: []
 }
 
 const userReducer = (state = USER_STATE, action) => {
@@ -23,6 +26,12 @@ const userReducer = (state = USER_STATE, action) => {
         }
         case SOCKET_INIT: {
             return applyInitTypingUsers(state, action)
+        }
+        case USER_CONNECT: {
+            return applyConnectUser(state, action)
+        }
+        case USER_DISCONNECT: {
+            return applyDisconnectUser(state, action)
         }
         default: return state
     }
@@ -42,7 +51,27 @@ const applyNotTypingUserOther = (state, action) => {
 }
 
 const applyInitTypingUsers = (state, action) => {
-    return {...state, usersTyping: action.payload.usersTyping}
+    return {
+        ...state, 
+        usersTyping: action.payload.usersTyping, 
+        usersConnected: action.payload.usersConnected
+    }
+}
+
+const applyConnectUser = (state, action) => {
+    return {
+        ...state,
+        usersConnected: [...state.usersConnected, action.payload.user]
+    }
+}
+
+const applyDisconnectUser = (state, action) => {
+    const usersConnected = state.usersConnected.filter(user => user !== action.payload.user)
+    console.log(usersConnected)
+    return {
+        ...state,
+        usersConnected        
+    }
 }
 
 export default userReducer

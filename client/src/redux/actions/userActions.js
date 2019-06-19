@@ -5,7 +5,9 @@ import {
     USER_SELF_TYPING,
     USER_OTHER_TYPING,
     USER_SELF_NOT_TYPING,
-    USER_OTHER_NOT_TYPING
+    USER_OTHER_NOT_TYPING,
+    USER_CONNECT,
+    USER_DISCONNECT
 } from '../constants/actionTypes'
 
 export const doLogin = username => dispatch => {
@@ -35,7 +37,26 @@ export const doInitSocket = data => {
     return {
         type: SOCKET_INIT,
         payload: {
-            usersTyping: data.usersTyping
+            usersTyping: data.usersTyping,
+            usersConnected: data.usersConnected
+        }
+    }
+}
+
+export const doConnectUser = user => {
+    return {
+        type: USER_CONNECT,
+        payload: {
+            user
+        }
+    }
+}
+
+export const doDisconnectUser = user => {
+    return {
+        type: USER_DISCONNECT,
+        payload: {
+            user
         }
     }
 }

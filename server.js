@@ -15,26 +15,31 @@ app.get("*", (req, res) => {
 })
 
 let usersTyping = [];
+let usersConnected = [];
 
 io.use((socket, next) => {
     socket.emit('init', {
         username: socket.handshake.query.username,
-        usersTyping
+        usersTyping,
+        usersConnected
     })
-    console.log('emited handshake')
     return next();
 })
 
 io.on('connection', (socket) => {
 
     const user = socket.handshake.query.username;
-       
+    
+    usersConnected = [...usersConnected, user]       
     console.log(`${user} has connected`);
     socket.broadcast.emit('information message', `${user} has connected`)
+    socket.broadcast.emit('user connect', user)
     
     socket.on('disconnect', () => {
+        usersConnected = usersConnected.filter(val => val !== user)
         console.log(`${user} has disconnected`)
         socket.broadcast.emit('information message', `${user} has disconnected`)
+        socket.broadcast.emit('user disconnect', user)
     });
 
     socket.on('chat message', msg => {
