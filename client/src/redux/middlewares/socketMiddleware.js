@@ -23,6 +23,7 @@ const createSocketMiddleware = url => store => {
             }
             case SOCKET_MESSAGE_SEND: {
                 socket.emit('chat message', action.payload)
+                store.dispatch(doAddMessage(action.payload))
                 break
             }
             default: break
