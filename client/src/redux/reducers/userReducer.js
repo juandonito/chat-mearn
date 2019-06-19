@@ -1,4 +1,9 @@
-import { USERNAME_SAVE, USER_OTHER_TYPING, USER_OTHER_NOT_TYPING } from '../constants/actionTypes'
+import { 
+    USERNAME_SAVE, 
+    USER_OTHER_TYPING, 
+    USER_OTHER_NOT_TYPING, 
+    SOCKET_INIT
+} from '../constants/actionTypes'
 
 const USER_STATE = {
     username: '',
@@ -16,6 +21,9 @@ const userReducer = (state = USER_STATE, action) => {
         case USER_OTHER_NOT_TYPING: {
             return applyNotTypingUserOther(state, action)
         }
+        case SOCKET_INIT: {
+            return applyInitTypingUsers(state, action)
+        }
         default: return state
     }
 }
@@ -31,6 +39,10 @@ const applyTypingUserOther = (state, action) => {
 const applyNotTypingUserOther = (state, action) => {
     const usersTyping = state.usersTyping.filter(user => user !== action.payload.user)
     return {...state, usersTyping}
+}
+
+const applyInitTypingUsers = (state, action) => {
+    return {...state, usersTyping: action.payload.usersTyping}
 }
 
 export default userReducer

@@ -1,6 +1,7 @@
 import { 
     USERNAME_SAVE, 
     SOCKET_CONNECT,
+    SOCKET_INIT,
     USER_SELF_TYPING,
     USER_OTHER_TYPING,
     USER_SELF_NOT_TYPING,
@@ -26,6 +27,15 @@ export const doConnectSocket = username => {
         type: SOCKET_CONNECT,
         payload: {
             username
+        }
+    }
+}
+
+export const doInitSocket = data => {
+    return {
+        type: SOCKET_INIT,
+        payload: {
+            usersTyping: data.usersTyping
         }
     }
 }

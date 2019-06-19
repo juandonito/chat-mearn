@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 import { SOCKET_MESSAGE_SEND, SOCKET_CONNECT, USER_SELF_TYPING, USER_SELF_NOT_TYPING } from '../constants/actionTypes'
 
 import { doAddMessage, doInformMessage } from '../actions/messageAction'
-import { doUserOtherTyping, doUserOtherNotTyping } from '../actions/userActions';
+import { doUserOtherTyping, doUserOtherNotTyping, doInitSocket } from '../actions/userActions';
 
 const createSocketMiddleware = url => store => {
 
@@ -14,6 +14,9 @@ const createSocketMiddleware = url => store => {
         switch(action.type) {
             case SOCKET_CONNECT: {
                 socket = io(url, {query: `username=${action.payload.username}`})
+                addUserInitialisation(socket, res => {
+                    store.dispatch(doInitSocket(res))
+                })
                 addChatMessageListener(socket, msg => {
                     store.dispatch(doAddMessage(msg))
                 })
@@ -46,6 +49,10 @@ const createSocketMiddleware = url => store => {
 
         return next(action)
     }
+}
+
+const addUserInitialisation = (socket, cb) => {
+    socket.on('init', cb)
 }
 
 const addChatMessageListener = (socket, cb) => {

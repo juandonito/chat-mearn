@@ -14,6 +14,17 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 })
 
+let usersTyping = [];
+
+io.use((socket, next) => {
+    socket.emit('init', {
+        username: socket.handshake.query.username,
+        usersTyping
+    })
+    console.log('emited handshake')
+    return next();
+})
+
 io.on('connection', (socket) => {
 
     const user = socket.handshake.query.username;
@@ -33,11 +44,13 @@ io.on('connection', (socket) => {
 
     socket.on('user typing', () => {
         console.log(`${user} is typing`)
+        usersTyping = [...usersTyping, user];
         socket.broadcast.emit('user typing', user)
     })
 
     socket.on('user not typing', () => {
         console.log(`${user} is not typing anymore`)
+        usersTyping = usersTyping.filter(val => val !== user);
         socket.broadcast.emit('user not typing', user)
     })
 })
