@@ -13,8 +13,8 @@ import { TEXT, INFO } from '../constants/messageTypes'
 const MessageList = ({ messages }) => {
 
     const messageType = {
-        TEXT: TextMessage,
-        INFO: InformationMessage
+        [TEXT]: TextMessage,
+        [INFO]: InformationMessage
     }
 
     const list = messages.map(message => {
